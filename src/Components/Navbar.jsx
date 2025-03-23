@@ -15,7 +15,7 @@ function Navbar() {
     <>
       <nav className="navbar navbar-expand-lg bg-body-tertiary">
         <div className="container-fluid">
-          <Link className="navbar-brand" to="/home">
+          <Link className="navbar-brand" to="/">
             SanskarBook
           </Link>
           <button
@@ -34,10 +34,10 @@ function Navbar() {
               <li className="nav-item">
                 <Link
                   className={`nav-link ${
-                    location.pathname === "/home" ? "active" : ""
+                    location.pathname === "/" ? "active" : ""
                   }`}
                   aria-current="page"
-                  to="/home"
+                  to="/"
                 >
                   Home
                 </Link>

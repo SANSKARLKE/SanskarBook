@@ -16,12 +16,11 @@ function App() {
         <Router>
           <Navbar />
           <Routes>
-            <Route path="/home" exact element={<Home />} />
+            <Route path="/" exact element={<Home />} />
             <Route path="/about" exact element={<About />} />
             <Route path="/login" exact element={<Login />} />
             <Route path="/signup" exact element={<SignUp />} />
             <Route path="/account" exact element={<Account />} />
-            <Route path="/" exact element={<Learner />} />
           </Routes>
         </Router>
       </NoteState>
