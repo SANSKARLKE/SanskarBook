@@ -27,7 +27,7 @@ const Login = (props) => {
     const json = await response.json();
     if (json.authToken) {
       localStorage.setItem("token", json.authToken);
-      navigate("/");
+      navigate("/SanskarBook/");
       showAlert("success", "Login Successfull");
     } else {
       showAlert("warning", "Invalid Credentials");

@@ -8,14 +8,14 @@ function Navbar() {
   const handleLogout = () => {
     localStorage.removeItem("token");
     showAlert("success", "Logout Successfull");
-    navigate("/login");
+    navigate("/SanskarBook/login");
   };
   useEffect(() => {}, [authToken]);
   return (
     <>
       <nav className="navbar navbar-expand-lg bg-body-tertiary">
         <div className="container-fluid">
-          <Link className="navbar-brand" to="/">
+          <Link className="navbar-brand" to="/SanskarBook/">
             SanskarBook
           </Link>
           <button
@@ -34,10 +34,10 @@ function Navbar() {
               <li className="nav-item">
                 <Link
                   className={`nav-link ${
-                    location.pathname === "/" ? "active" : ""
+                    location.pathname === "/SanskarBook/" ? "active" : ""
                   }`}
                   aria-current="page"
-                  to="/"
+                  to="/SanskarBook/"
                 >
                   Home
                 </Link>
@@ -45,9 +45,9 @@ function Navbar() {
               <li className="nav-item">
                 <Link
                   className={`nav-link ${
-                    location.pathname === "/about" ? "active" : ""
+                    location.pathname === "/SanskarBook/about" ? "active" : ""
                   }`}
-                  to="/about"
+                  to="/SanskarBook/about"
                 >
                   About
                 </Link>
@@ -58,7 +58,7 @@ function Navbar() {
                 <Link
                   className="btn btn-primary mx-1"
                   role="button"
-                  to="/account"
+                  to="/SanskarBook/account"
                 >
                   Account
                 </Link>
@@ -74,14 +74,14 @@ function Navbar() {
               <form className="d-flex" role="search">
                 <Link
                   className="btn btn-primary mx-1"
-                  to="/login"
+                  to="/SanskarBook/login"
                   role="button"
                 >
                   Login
                 </Link>
                 <Link
                   className="btn btn-primary mx-1"
-                  to="/signup"
+                  to="/SanskarBook/signup"
                   role="button"
                 >
                   SignUp

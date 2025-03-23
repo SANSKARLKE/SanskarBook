@@ -16,11 +16,11 @@ function App() {
         <Router>
           <Navbar />
           <Routes>
-            <Route path="/" exact element={<Home />} />
-            <Route path="/about" exact element={<About />} />
-            <Route path="/login" exact element={<Login />} />
-            <Route path="/signup" exact element={<SignUp />} />
-            <Route path="/account" exact element={<Account />} />
+            <Route path="/SanskarBook/" exact element={<Home />} />
+            <Route path="/SanskarBook/about" exact element={<About />} />
+            <Route path="/SanskarBook/login" exact element={<Login />} />
+            <Route path="/SanskarBook/signup" exact element={<SignUp />} />
+            <Route path="/SanskarBook/account" exact element={<Account />} />
           </Routes>
         </Router>
       </NoteState>

@@ -48,7 +48,7 @@ function Notes(props) {
       getAllNotes();
       getUserInfo();
     } else {
-      navigate("/login");
+      navigate("/SanskarBook/login");
     }
   }, []);
   const localViewClick = (viewnote) => {

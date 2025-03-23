@@ -34,7 +34,7 @@ const SignUp = (props) => {
       const json = await response.json();
       if (json.authToken) {
         localStorage.setItem("token", json.authToken);
-        navigate("/");
+        navigate("/SanskarBook/");
         showAlert("success", "Account Created Successfully");
       } else {
         showAlert("warning", "Please enter another email");

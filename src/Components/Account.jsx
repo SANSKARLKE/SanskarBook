@@ -18,7 +18,7 @@ function Account() {
       handleGetData();
     }
     if (!localStorage.getItem("token")) {
-      navigate("/login");
+      navigate("/SanskarBook/login");
     }
   }, [authToken]);
   const handleGetData = async () => {
@@ -55,7 +55,7 @@ function Account() {
     if (json.message === "user deleted") {
       showAlert("success", "Account Deleted Successfully");
       localStorage.removeItem("token");
-      navigate("/login");
+      navigate("/SanskarBook/login");
     } else {
       showAlert("warning", "Please login again");
     }
