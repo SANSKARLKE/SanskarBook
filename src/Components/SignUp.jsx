@@ -45,21 +45,32 @@ const SignUp = (props) => {
     setCreateLoading(false);
   };
   return createLoading ? (
-    <div
-      className="d-flex"
-      style={{
-        justifyContent: "center",
-        paddingTop: "50px",
-      }}
-    >
+    <>
       <div
-        className="spinner-border"
-        style={{ width: "3rem", height: "3rem" }}
-        role="status"
+        className="d-flex"
+        style={{
+          justifyContent: "center",
+          paddingTop: "50px",
+        }}
       >
-        <span className="visually-hidden">Loading...</span>
+        <div
+          className="spinner-border"
+          style={{ width: "3rem", height: "3rem" }}
+          role="status"
+        >
+          <span className="visually-hidden">Loading...</span>
+        </div>
       </div>
-    </div>
+      <div
+        className="d-flex"
+        style={{
+          justifyContent: "center",
+          paddingTop: "50px",
+        }}
+      >
+        Please wait. This can take upto 50 seconds.
+      </div>
+    </>
   ) : (
     <div>
       <div

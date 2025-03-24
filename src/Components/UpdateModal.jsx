@@ -1,6 +1,9 @@
-import React from "react";
+import React, { useContext } from "react";
+import noteContext from "../Context/Notes/noteContext";
 
 function UpdateModal(props) {
+  const context = useContext(noteContext);
+  const { mode } = context;
   return (
     <>
       <button
@@ -19,10 +22,16 @@ function UpdateModal(props) {
         aria-hidden="true"
       >
         <div className="modal-dialog modal-fullscreen">
-          <div className="modal-content">
+          <div
+            className="modal-content"
+            style={{
+              backgroundColor: mode === "light" ? "white" : "#393A3A",
+              color: mode === "light" ? "black" : "white",
+            }}
+          >
             <div
               className="modal-header"
-              style={{ backgroundColor: "#44C187" }}
+              style={{ backgroundColor: "#44C187", color: "black" }}
             >
               <h1 className="modal-title fs-5" id="exampleModalLabel">
                 Update your note
@@ -47,6 +56,10 @@ function UpdateModal(props) {
                     name="utitle"
                     onChange={props.handleChange}
                     value={props.lNote.utitle}
+                    style={{
+                      backgroundColor: mode === "light" ? "white" : "#393A3A",
+                      color: mode === "light" ? "black" : "white",
+                    }}
                   />
                 </div>
                 <div className="mb-3">
@@ -68,6 +81,10 @@ function UpdateModal(props) {
                     onChange={props.handleChange}
                     value={props.lNote.ucontent}
                     rows="10"
+                    style={{
+                      backgroundColor: mode === "light" ? "white" : "#393A3A",
+                      color: mode === "light" ? "black" : "white",
+                    }}
                   ></textarea>
                 </div>
                 <div className="mb-3">
@@ -81,6 +98,10 @@ function UpdateModal(props) {
                     name="utag"
                     onChange={props.handleChange}
                     value={props.lNote.utag}
+                    style={{
+                      backgroundColor: mode === "light" ? "white" : "#393A3A",
+                      color: mode === "light" ? "black" : "white",
+                    }}
                   />
                 </div>
               </form>
@@ -88,7 +109,9 @@ function UpdateModal(props) {
             <div className="modal-footer">
               <button
                 type="button"
-                className="btn btn-outline-secondary btn-sm"
+                className={`btn btn-outline-${
+                  mode === "light" ? "secondary" : "light"
+                } btn-sm`}
                 data-bs-dismiss="modal"
                 ref={props.ref2}
               >
@@ -96,7 +119,7 @@ function UpdateModal(props) {
               </button>
               <button
                 type="button"
-                className="btn btn-sm btn-success"
+                className="btn btn-success"
                 onClick={props.handleClick}
                 disabled={
                   props.lNote.utitle.length < 5 ||

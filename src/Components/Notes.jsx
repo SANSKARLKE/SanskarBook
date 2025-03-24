@@ -41,6 +41,7 @@ function Notes(props) {
     user,
     alert,
     getUserInfo,
+    mode,
     notesLoading,
   } = context;
   useEffect(() => {
@@ -90,20 +91,16 @@ function Notes(props) {
   const viewRef2 = useRef(null);
   const handleCreateClick = () => {
     newRef2.current.click();
+    addNote({
+      title: nNote.ntitle,
+      content: nNote.ncontent,
+      tag: nNote.ntag,
+    });
     setNNote({
       ntitle: "",
       ncontent: "",
       ntag: "",
     });
-    if (nNote.ntag === "") {
-      addNote({ title: nNote.ntitle, content: nNote.ncontent });
-    } else {
-      addNote({
-        title: nNote.ntitle,
-        content: nNote.ncontent,
-        tag: nNote.ntag,
-      });
-    }
   };
   const handleDeleteClick = () => {
     delRef2.current.click();
@@ -125,8 +122,12 @@ function Notes(props) {
   const handleNewChange = (event) => {
     setNNote({ ...nNote, [event.target.name]: event.target.value });
   };
+  const style = {
+    color: mode === "light" ? "black" : "white",
+    backgroundColor: mode === "light" ? "white" : "#282828",
+  };
   return notesLoading ? (
-    <>
+    <div style={style}>
       <div
         className="d-flex"
         style={{
@@ -151,7 +152,7 @@ function Notes(props) {
       >
         Please wait. This can take upto 50 seconds.
       </div>
-    </>
+    </div>
   ) : (
     <div>
       <div
@@ -185,7 +186,7 @@ function Notes(props) {
         handleNewChange={handleNewChange}
       />
       <ViewModal ref={viewRef} ref2={viewRef2} vNote={vNote} />
-      <div>
+      <div style={style}>
         <h3>Welcome, {user.name.at(0).toUpperCase() + user.name.slice(1)}</h3>
         <div
           className="d-flex my-3"

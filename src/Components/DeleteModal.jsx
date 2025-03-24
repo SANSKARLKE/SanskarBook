@@ -1,6 +1,9 @@
-import React from "react";
+import React, { useContext } from "react";
+import noteContext from "../Context/Notes/noteContext";
 
 function DeleteModal(props) {
+  const context = useContext(noteContext);
+  const { mode } = context;
   return (
     <>
       <button
@@ -19,10 +22,16 @@ function DeleteModal(props) {
         aria-hidden="true"
       >
         <div className="modal-dialog modal-dialog-centered">
-          <div className="modal-content">
+          <div
+            className="modal-content"
+            style={{
+              backgroundColor: mode === "light" ? "white" : "#393A3A",
+              color: mode === "light" ? "black" : "white",
+            }}
+          >
             <div
               className="modal-header"
-              style={{ backgroundColor: "#FF5D6D" }}
+              style={{ backgroundColor: "#FF5D6D", color: "black" }}
             >
               <h1 className="modal-title fs-5" id="deleteModalLabel">
                 Delete this note?
@@ -49,7 +58,7 @@ function DeleteModal(props) {
                     : props.dNote.dcontent
                   : ""}
               </div>
-              {props.dNote.dtag !== undefined ? (
+              {props.dNote.dtag !== undefined && props.dNote.dtag !== "" ? (
                 <div>
                   <br />
                   <div>It has this tag :</div>
@@ -60,7 +69,9 @@ function DeleteModal(props) {
             <div className="modal-footer">
               <button
                 type="button"
-                className="btn btn-outline-secondary btn-sm"
+                className={`btn btn-outline-${
+                  mode === "light" ? "secondary" : "light"
+                } btn-sm`}
                 data-bs-dismiss="modal"
                 ref={props.delRef2}
               >
@@ -68,7 +79,7 @@ function DeleteModal(props) {
               </button>
               <button
                 type="button"
-                className="btn btn-sm btn-danger"
+                className="btn btn-danger"
                 onClick={props.handleDeleteClick}
               >
                 Delete

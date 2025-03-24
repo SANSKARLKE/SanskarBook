@@ -12,8 +12,12 @@ function Account() {
   const navigate = useNavigate();
   const [user, setUser] = useState({ _id: "", name: "", email: "", date: "" });
   const context = useContext(noteContext);
-  const { base, authToken, showAlert, notes, getAllNotes, deleteNote } =
+  const { base, authToken, showAlert, notes, getAllNotes, deleteNote, mode } =
     context;
+  const style = {
+    color: mode === "light" ? "black" : "white",
+    backgroundColor: mode === "light" ? "white" : "#282828",
+  };
   useEffect(() => {
     if (authToken) {
       handleGetData();
@@ -65,7 +69,7 @@ function Account() {
     }
   };
   return dataLoading ? (
-    <>
+    <div style={style}>
       <div
         className="d-flex"
         style={{
@@ -90,9 +94,9 @@ function Account() {
       >
         Please wait. This can take upto 50 seconds.
       </div>
-    </>
+    </div>
   ) : (
-    <div className="container my-3">
+    <div className="container my-3" style={style}>
       <div
         className="d-flex my-3"
         style={{
@@ -157,10 +161,15 @@ function Account() {
         aria-hidden="true"
       >
         <div className="modal-dialog modal-dialog-centered">
-          <div className="modal-content">
+          <div
+            className="modal-content"
+            style={{
+              backgroundColor: mode === "light" ? "white" : "#393A3A",
+            }}
+          >
             <div
               className="modal-header"
-              style={{ backgroundColor: "#FF5D6D" }}
+              style={{ backgroundColor: "#FF5D6D", color: "black" }}
             >
               <h1 className="modal-title fs-5" id="deleteAccountModalLabel">
                 Delete Account
@@ -178,7 +187,9 @@ function Account() {
             <div className="modal-footer">
               <button
                 type="button"
-                className="btn btn-sm btn-outline-secondary"
+                className={`btn btn-sm btn-outline-${
+                  mode === "light" ? "secondary" : "light"
+                }`}
                 data-bs-dismiss="modal"
                 ref={ref2}
               >
@@ -186,7 +197,7 @@ function Account() {
               </button>
               <button
                 type="button"
-                className="btn btn-sm btn-danger"
+                className="btn btn-danger"
                 onClick={handleDeleteAccount}
               >
                 Delete Account

@@ -2,6 +2,7 @@ import React, { useState, useRef } from "react";
 import noteContext from "./noteContext";
 
 const NoteState = (props) => {
+  const [mode, setMode] = useState("light");
   const [notesLoading, setNotesLoading] = useState(false);
   const [alert, setAlert] = useState(null);
   const showAlert = (type, message) => {
@@ -147,6 +148,8 @@ const NoteState = (props) => {
         base,
         authToken,
         notesLoading,
+        mode,
+        setMode,
       }}
     >
       {props.children}

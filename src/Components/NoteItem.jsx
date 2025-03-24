@@ -4,7 +4,11 @@ import { Link } from "react-router-dom";
 
 function NoteItem(props) {
   const context = useContext(noteContext);
-  const { deleteNote } = context;
+  const { mode } = context;
+  const style = {
+    color: mode === "light" ? "black" : "white",
+    backgroundColor: mode === "light" ? "white" : "#393A3A",
+  };
   const titleFixer = (title) => {
     if (title.length >= 53) {
       return title.slice(0, 51) + "...";
@@ -29,7 +33,23 @@ function NoteItem(props) {
   };
   return (
     <>
-      <div className="card">
+      <div className="card" style={style}>
+        {props.note.tag && props.note.tag !== "" && (
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "flex-end",
+              position: "absolute",
+              right: "0",
+            }}
+          >
+            <span className="badge  bg-primary">
+              {props.note.tag.length > 15
+                ? props.note.tag.slice(0, 15) + "..."
+                : props.note.tag}
+            </span>
+          </div>
+        )}
         <div className="card-body">
           <h5 className="card-title">{titleFixer(props.note.title)}</h5>
           <p className="card-text">{contentFixer(props.note.content)}</p>

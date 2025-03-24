@@ -1,6 +1,9 @@
-import React from "react";
+import React, { useContext } from "react";
+import noteContext from "../Context/Notes/noteContext";
 
 function ViewModal(props) {
+  const context = useContext(noteContext);
+  const { mode } = context;
   return (
     <>
       <button
@@ -19,13 +22,19 @@ function ViewModal(props) {
         aria-hidden="true"
       >
         <div className="modal-dialog modal-fullscreen">
-          <div className="modal-content">
+          <div
+            className="modal-content"
+            style={{
+              backgroundColor: mode === "light" ? "white" : "#393A3A",
+              color: mode === "light" ? "black" : "white",
+            }}
+          >
             <div
               className="modal-header"
               style={{ backgroundColor: "#70a7f9" }}
             >
               <h1 className="modal-title fs-5" id="viewModalLabel">
-                <div>View your note</div>
+                <div style={{ color: "black" }}>View your note</div>
               </h1>
               <button
                 type="button"
