@@ -118,7 +118,8 @@ const SignUp = (props) => {
             website's functionality, ensuring you fully understand the features
             and the underlying technology.
             <br /> <br /> It's important to note that you can only access
-            SanskarBook through the official base link, which is "link later."
+            SanskarBook through the official{" "}
+            <a href="https://sanskarlke.github.io/SanskarBook">base link</a>.
             After entering the website through this link, you can use the
             intuitive navigation buttons built into the site to seamlessly move
             between pages, explore its features, and make the most of your
