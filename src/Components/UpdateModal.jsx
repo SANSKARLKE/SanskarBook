@@ -80,7 +80,7 @@ function UpdateModal(props) {
                     name="ucontent"
                     onChange={props.handleChange}
                     value={props.lNote.ucontent}
-                    rows="10"
+                    rows="15"
                     style={{
                       backgroundColor: mode === "light" ? "white" : "#393A3A",
                       color: mode === "light" ? "black" : "white",

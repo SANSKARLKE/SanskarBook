@@ -67,7 +67,7 @@ function NewModal(props) {
                     name="ncontent"
                     onChange={props.handleNewChange}
                     value={props.nNote.ncontent}
-                    rows="5"
+                    rows="15"
                   ></textarea>
                 </div>
                 <div className="mb-3">

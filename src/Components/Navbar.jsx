@@ -108,14 +108,24 @@ function Navbar() {
                 </div>
               </form>
             ) : (
-              <form className="d-flex" role="search">
-                <div className="form-check form-switch space-side">
+              <form
+                className="d-flex"
+                role="search"
+                style={{ alignItems: "center" }}
+              >
+                <div
+                  className="form-check form-switch space-side"
+                  style={{ paddingRight: "10px" }}
+                >
                   <input
                     className="form-check-input"
                     type="checkbox"
                     role="switch"
                     id="flexSwitchCheckDefault"
                     style={{ cursor: "pointer" }}
+                    onClick={() => {
+                      setMode(mode === "light" ? "dark" : "light");
+                    }}
                   />
                   <label
                     className={`form-check-label text-${
