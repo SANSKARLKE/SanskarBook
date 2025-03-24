@@ -12,7 +12,8 @@ function Account() {
   const navigate = useNavigate();
   const [user, setUser] = useState({ _id: "", name: "", email: "", date: "" });
   const context = useContext(noteContext);
-  const { base, authToken, showAlert, notes, getAllNotes } = context;
+  const { base, authToken, showAlert, notes, getAllNotes, deleteNote } =
+    context;
   useEffect(() => {
     if (authToken) {
       handleGetData();
@@ -45,6 +46,9 @@ function Account() {
   };
   const handleDeleteAccount = async () => {
     ref2.current.click();
+    for (let i = 0; i < notes.length; i++) {
+      await deleteNote(notes[i]._id);
+    }
     const response = await fetch(`${base}/api/auth/deleteuser`, {
       method: "DELETE",
       headers: {
@@ -61,24 +65,47 @@ function Account() {
     }
   };
   return dataLoading ? (
-    <div
-      className="container d-flex"
-      style={{
-        justifyContent: "center",
-        paddingTop: "50px",
-      }}
-    >
+    <>
       <div
-        className="spinner-border"
-        style={{ width: "3rem", height: "3rem" }}
-        role="status"
+        className="d-flex"
+        style={{
+          justifyContent: "center",
+          paddingTop: "50px",
+        }}
       >
-        <span className="visually-hidden">Loading...</span>
+        <div
+          className="spinner-border"
+          style={{ width: "3rem", height: "3rem" }}
+          role="status"
+        >
+          <span className="visually-hidden">Loading...</span>
+        </div>
       </div>
-    </div>
+      <div
+        className="d-flex"
+        style={{
+          justifyContent: "center",
+          paddingTop: "50px",
+        }}
+      >
+        Please wait. This can take upto 50 seconds.
+      </div>
+    </>
   ) : (
     <div className="container my-3">
-      <h3>Your Account</h3>
+      <div
+        className="d-flex my-3"
+        style={{
+          justifyContent: "space-between",
+          alignItems: "center",
+          paddingTop: "15px",
+        }}
+      >
+        <h3>Your Account Details</h3>
+        <div className="btn btn-danger" onClick={handleDeleteClick}>
+          Delete Account
+        </div>
+      </div>
       <div className="d-flex" style={{ paddingTop: "15px" }}>
         <strong>
           <p>Id : </p>
@@ -110,11 +137,6 @@ function Account() {
           <p>Notes : </p>
         </strong>
         <p style={{ paddingLeft: "5px" }}>{notes.length}</p>
-      </div>
-      <div>
-        <div className="btn btn-danger" onClick={handleDeleteClick}>
-          Delete Account
-        </div>
       </div>
       <button
         type="button"

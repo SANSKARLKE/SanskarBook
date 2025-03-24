@@ -90,6 +90,11 @@ function Notes(props) {
   const viewRef2 = useRef(null);
   const handleCreateClick = () => {
     newRef2.current.click();
+    setNNote({
+      ntitle: "",
+      ncontent: "",
+      ntag: "",
+    });
     if (nNote.ntag === "") {
       addNote({ title: nNote.ntitle, content: nNote.ncontent });
     } else {
@@ -97,11 +102,6 @@ function Notes(props) {
         title: nNote.ntitle,
         content: nNote.ncontent,
         tag: nNote.ntag,
-      });
-      setNNote({
-        ntitle: "",
-        ncontent: "",
-        ntag: "",
       });
     }
   };
@@ -112,6 +112,12 @@ function Notes(props) {
   const handleClick = () => {
     ref2.current.click();
     updateNote(lNote);
+    setLNote({
+      utitle: "",
+      ucontent: "",
+      utag: "",
+      uid: "",
+    });
   };
   const handleChange = (event) => {
     setLNote({ ...lNote, [event.target.name]: event.target.value });
@@ -120,21 +126,32 @@ function Notes(props) {
     setNNote({ ...nNote, [event.target.name]: event.target.value });
   };
   return notesLoading ? (
-    <div
-      className="d-flex"
-      style={{
-        justifyContent: "center",
-        paddingTop: "50px",
-      }}
-    >
+    <>
       <div
-        className="spinner-border"
-        style={{ width: "3rem", height: "3rem" }}
-        role="status"
+        className="d-flex"
+        style={{
+          justifyContent: "center",
+          paddingTop: "50px",
+        }}
       >
-        <span className="visually-hidden">Loading...</span>
+        <div
+          className="spinner-border"
+          style={{ width: "3rem", height: "3rem" }}
+          role="status"
+        >
+          <span className="visually-hidden">Loading...</span>
+        </div>
       </div>
-    </div>
+      <div
+        className="d-flex"
+        style={{
+          justifyContent: "center",
+          paddingTop: "50px",
+        }}
+      >
+        Please wait. This can take upto 50 seconds.
+      </div>
+    </>
   ) : (
     <div>
       <div

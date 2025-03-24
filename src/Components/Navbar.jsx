@@ -56,14 +56,14 @@ function Navbar() {
             {localStorage.getItem("token") ? (
               <form className="d-flex" role="search">
                 <Link
-                  className="btn btn-primary mx-1"
+                  className="btn btn-outline-primary mx-1"
                   role="button"
                   to="/SanskarBook/account"
                 >
                   Account
                 </Link>
                 <div
-                  className="btn btn-danger mx-1"
+                  className="btn btn-outline-danger mx-1"
                   role="button"
                   onClick={handleLogout}
                 >
