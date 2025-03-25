@@ -153,14 +153,14 @@ function Navbar() {
                   </label>
                 </div>
                 <Link
-                  className="btn btn-primary mx-1"
+                  className="btn btn-outline-primary mx-1"
                   to="/SanskarBook/login"
                   role="button"
                 >
                   Login
                 </Link>
                 <Link
-                  className="btn btn-primary mx-1"
+                  className="btn btn-outline-primary mx-1"
                   to="/SanskarBook/signup"
                   role="button"
                 >
