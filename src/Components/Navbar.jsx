@@ -68,6 +68,16 @@ function Navbar() {
                   About
                 </Link>
               </li>
+              <li className="nav-item">
+                <a
+                  className={`nav-link text-${
+                    mode === "light" ? "dark" : "light"
+                  }`}
+                  href="https://sanskarlke.github.io/SanskarBook/"
+                >
+                  Refresh Page
+                </a>
+              </li>
             </ul>
             {localStorage.getItem("SanskarBookToken") ? (
               <form
@@ -85,6 +95,7 @@ function Navbar() {
                     role="switch"
                     id="flexSwitchCheckDefault"
                     checked={mode === "dark"}
+                    onChange={() => {}}
                     style={{ cursor: "pointer" }}
                     onClick={changeMode}
                   />
@@ -128,6 +139,7 @@ function Navbar() {
                     role="switch"
                     id="flexSwitchCheckDefault"
                     checked={mode === "dark"}
+                    onChange={() => {}}
                     style={{ cursor: "pointer" }}
                     onClick={changeMode}
                   />
