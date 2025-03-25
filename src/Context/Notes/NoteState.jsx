@@ -1,8 +1,28 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import noteContext from "./noteContext";
 
 const NoteState = (props) => {
-  const [mode, setMode] = useState("light");
+  const [mode, setMode] = useState("");
+
+  // Use useEffect to set the initial mode from localStorage
+  useEffect(() => {
+    const savedMode = localStorage.getItem("SanskarBookMode");
+    if (savedMode) {
+      setMode(savedMode);
+    } else {
+      localStorage.setItem("SanskarBookMode", "light");
+    }
+  }, []);
+  const changeMode = () => {
+    if (mode === "light") {
+      setMode("dark");
+      localStorage.setItem("SanskarBookMode", "dark");
+    } else {
+      setMode("light");
+      localStorage.setItem("SanskarBookMode", "light");
+    }
+  };
+
   const [notesLoading, setNotesLoading] = useState(false);
   const [alert, setAlert] = useState(null);
   const showAlert = (type, message) => {
@@ -12,7 +32,7 @@ const NoteState = (props) => {
     }, 2000);
   };
   const base = "https://sanskarbookbackend.onrender.com";
-  const authToken = localStorage.getItem("token");
+  const authToken = localStorage.getItem("SanskarBookToken");
   const getAllNotes = async () => {
     setNotesLoading(true);
     const response = await fetch(`${base}/api/notes/fetchallnotes`, {
@@ -149,7 +169,7 @@ const NoteState = (props) => {
         authToken,
         notesLoading,
         mode,
-        setMode,
+        changeMode,
       }}
     >
       {props.children}

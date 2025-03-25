@@ -18,11 +18,16 @@ function Account() {
     color: mode === "light" ? "black" : "white",
     backgroundColor: mode === "light" ? "white" : "#282828",
   };
+  const style2 = {
+    color: mode === "light" ? "black" : "white",
+    backgroundColor: mode === "light" ? "white" : "#282828",
+    paddingTop: "60px",
+  };
   useEffect(() => {
     if (authToken) {
       handleGetData();
     }
-    if (!localStorage.getItem("token")) {
+    if (!localStorage.getItem("SanskarBookToken")) {
       navigate("/SanskarBook/login");
     }
   }, [authToken]);
@@ -62,14 +67,14 @@ function Account() {
     const json = await response.json();
     if (json.message === "user deleted") {
       showAlert("success", "Account Deleted Successfully");
-      localStorage.removeItem("token");
+      localStorage.removeItem("SanskarBookToken");
       navigate("/SanskarBook/login");
     } else {
       showAlert("warning", "Please login again");
     }
   };
   return dataLoading ? (
-    <div style={style}>
+    <div style={style2}>
       <div
         className="d-flex"
         style={{
@@ -96,7 +101,7 @@ function Account() {
       </div>
     </div>
   ) : (
-    <div className="container my-3" style={style}>
+    <div className="container my-3" style={style2}>
       <div
         className="d-flex my-3"
         style={{

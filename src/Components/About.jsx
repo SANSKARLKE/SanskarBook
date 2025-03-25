@@ -7,7 +7,12 @@ function About() {
     color: mode === "light" ? "black" : "white",
     backgroundColor: mode === "light" ? "white" : "#282828",
   };
-  return <div style={style}>About Component</div>;
+  const style2 = {
+    color: mode === "light" ? "black" : "white",
+    backgroundColor: mode === "light" ? "white" : "#282828",
+    paddingTop: "60px",
+  };
+  return <div style={style2}>About Component</div>;
 }
 
 export default About;

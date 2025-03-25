@@ -27,7 +27,7 @@ const Login = (props) => {
     });
     const json = await response.json();
     if (json.authToken) {
-      localStorage.setItem("token", json.authToken);
+      localStorage.setItem("SanskarBookToken", json.authToken);
       navigate("/SanskarBook/");
       showAlert("success", "Login Successfull");
     } else {
@@ -41,6 +41,7 @@ const Login = (props) => {
       style={{
         backgroundColor: mode === "light" ? "white" : "#282828",
         color: mode === "light" ? "black" : "white",
+        paddingTop: "60px",
       }}
     >
       <div
@@ -69,7 +70,7 @@ const Login = (props) => {
       </div>
     </div>
   ) : (
-    <div style={{ height: "90vh" }}>
+    <div style={{ height: "90vh", paddingTop: "60px" }}>
       <div
         className={`flex-container`}
         style={{

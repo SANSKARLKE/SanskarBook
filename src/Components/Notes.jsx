@@ -45,7 +45,7 @@ function Notes(props) {
     notesLoading,
   } = context;
   useEffect(() => {
-    if (localStorage.getItem("token")) {
+    if (localStorage.getItem("SanskarBookToken")) {
       getAllNotes();
       getUserInfo();
     } else {

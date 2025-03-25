@@ -4,10 +4,10 @@ import noteContext from "../Context/Notes/noteContext";
 function Navbar() {
   const context = useContext(noteContext);
   const navigate = useNavigate();
-  const { authToken, showAlert, mode, setMode } = context;
+  const { authToken, showAlert, mode, changeMode } = context;
   document.body.style.backgroundColor = mode === "light" ? "white" : "#282828";
   const handleLogout = () => {
-    localStorage.removeItem("token");
+    localStorage.removeItem("SanskarBookToken");
     showAlert("success", "Logout Successfull");
     navigate("/SanskarBook/login");
   };
@@ -15,7 +15,7 @@ function Navbar() {
   return (
     <>
       <nav
-        className={`navbar navbar-expand-lg bg-${
+        className={`navbar fixed-top navbar-expand-lg bg-${
           mode === "light" ? "light" : "dark"
         }`}
       >
@@ -37,7 +37,13 @@ function Navbar() {
             aria-expanded="false"
             aria-label="Toggle navigation"
           >
-            <span className="navbar-toggler-icon"></span>
+            <span
+              className="navbar-toggler-icon light"
+              style={{
+                backgroundColor: mode === "light" ? "white" : "#212529",
+                color: mode === "light" ? "black" : "white",
+              }}
+            ></span>
           </button>
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <ul className="navbar-nav me-auto mb-2 mb-lg-0">
@@ -63,7 +69,7 @@ function Navbar() {
                 </Link>
               </li>
             </ul>
-            {localStorage.getItem("token") ? (
+            {localStorage.getItem("SanskarBookToken") ? (
               <form
                 className="d-flex"
                 role="search"
@@ -78,10 +84,9 @@ function Navbar() {
                     type="checkbox"
                     role="switch"
                     id="flexSwitchCheckDefault"
+                    checked={mode === "dark"}
                     style={{ cursor: "pointer" }}
-                    onClick={() => {
-                      setMode(mode === "light" ? "dark" : "light");
-                    }}
+                    onClick={changeMode}
                   />
                   <label
                     className={`form-check-label text-${
@@ -122,10 +127,9 @@ function Navbar() {
                     type="checkbox"
                     role="switch"
                     id="flexSwitchCheckDefault"
+                    checked={mode === "dark"}
                     style={{ cursor: "pointer" }}
-                    onClick={() => {
-                      setMode(mode === "light" ? "dark" : "light");
-                    }}
+                    onClick={changeMode}
                   />
                   <label
                     className={`form-check-label text-${
