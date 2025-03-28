@@ -1,1 +1,0 @@
-.flex-container{display:flex;background-color:var(--background-color);color:var(--text-color);padding-top:15px;height:100%}.flex-container-2{display:flex;align-items:center;justify-content:flex-start;flex-direction:column;padding-left:50px;padding-right:50px;width:65%}@media (max-width: 850px){.flex-container{flex-wrap:wrap}.flex-container-2{width:100%}}
