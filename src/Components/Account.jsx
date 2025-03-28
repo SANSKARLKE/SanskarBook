@@ -1,19 +1,30 @@
 import React, { useEffect, useContext, useState, useRef } from "react";
 import noteContext from "../Context/Notes/noteContext";
 import { useNavigate } from "react-router-dom";
+import Alert from "./Alert";
 
 function Account() {
   const [dataLoading, setDataLoading] = useState(false);
   const ref = useRef(null);
   const ref2 = useRef(null);
+  const reff = useRef(null);
+  const ref22 = useRef(null);
   const handleDeleteClick = () => {
     ref.current.click();
   };
   const navigate = useNavigate();
   const [user, setUser] = useState({ _id: "", name: "", email: "", date: "" });
   const context = useContext(noteContext);
-  const { base, authToken, showAlert, notes, getAllNotes, deleteNote, mode } =
-    context;
+  const {
+    base,
+    authToken,
+    alert,
+    showAlert,
+    notes,
+    getAllNotes,
+    deleteNote,
+    mode,
+  } = context;
   const style = {
     color: mode === "light" ? "black" : "white",
     backgroundColor: mode === "light" ? "white" : "#282828",
@@ -53,10 +64,26 @@ function Account() {
     }
     setDataLoading(false);
   };
+  const handleDeleteAllNotes = async () => {
+    ref22.current.click();
+    try {
+      for (let i = 0; i < notes.length; i++) {
+        await deleteNote(notes[i]._id);
+      }
+      showAlert("success", "All notes deleted successfully");
+    } catch (error) {
+      showAlert("warning", "Please try again later");
+    }
+  };
   const handleDeleteAccount = async () => {
     ref2.current.click();
-    for (let i = 0; i < notes.length; i++) {
-      await deleteNote(notes[i]._id);
+    try {
+      for (let i = 0; i < notes.length; i++) {
+        await deleteNote(notes[i]._id);
+      }
+    } catch (error) {
+      showAlert("warning", "Please try again later");
+      return;
     }
     const response = await fetch(`${base}/api/auth/deleteuser`, {
       method: "DELETE",
@@ -103,6 +130,16 @@ function Account() {
   ) : (
     <div className="container my-3" style={style2}>
       <div
+        style={{
+          position: "fixed",
+          bottom: "20px",
+          right: "20px",
+          zIndex: 1000,
+        }}
+      >
+        <Alert alert={alert} />
+      </div>
+      <div
         className="d-flex my-3"
         style={{
           justifyContent: "space-between",
@@ -111,8 +148,20 @@ function Account() {
         }}
       >
         <h3>Your Account Details</h3>
-        <div className="btn btn-danger" onClick={handleDeleteClick}>
-          Delete Account
+        <div className="d-flex" style={{ alignItems: "center" }}>
+          <div style={{ paddingRight: "10px" }}>
+            <div
+              className="btn btn-sm btn-outline-danger"
+              onClick={() => {
+                reff.current.click();
+              }}
+            >
+              Delete All Notes
+            </div>
+          </div>
+          <div className="btn btn-danger" onClick={handleDeleteClick}>
+            Delete Account
+          </div>
         </div>
       </div>
       <div className="d-flex" style={{ paddingTop: "15px" }}>
@@ -206,6 +255,70 @@ function Account() {
                 onClick={handleDeleteAccount}
               >
                 Delete Account
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <button
+        type="button"
+        className="btn btn-primary"
+        data-bs-toggle="modal"
+        data-bs-target="#deleteNotesModal"
+        ref={reff}
+        hidden
+      >
+        Launch demo modal
+      </button>
+
+      <div
+        className="modal fade"
+        id="deleteNotesModal"
+        tabIndex="-1"
+        aria-labelledby="deleteNotesModalLabel"
+        aria-hidden="true"
+      >
+        <div className="modal-dialog modal-dialog-centered">
+          <div
+            className="modal-content"
+            style={{
+              backgroundColor: mode === "light" ? "white" : "#393A3A",
+            }}
+          >
+            <div
+              className="modal-header"
+              style={{ backgroundColor: "#FF5D6D", color: "black" }}
+            >
+              <h1 className="modal-title fs-5" id="deleteNotesModalLabel">
+                Delete All Notes
+              </h1>
+              <button
+                type="button"
+                className="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              ></button>
+            </div>
+            <div className="modal-body">
+              Are you sure you want to delete all your Notes?
+            </div>
+            <div className="modal-footer">
+              <button
+                type="button"
+                className={`btn btn-sm btn-outline-${
+                  mode === "light" ? "secondary" : "light"
+                }`}
+                data-bs-dismiss="modal"
+                ref={ref22}
+              >
+                Close
+              </button>
+              <button
+                type="button"
+                className="btn btn-danger"
+                onClick={handleDeleteAllNotes}
+              >
+                Delete All Notes
               </button>
             </div>
           </div>
